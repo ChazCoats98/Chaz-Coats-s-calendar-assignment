@@ -7,6 +7,7 @@ The purpose of this project was to create a calendar that the user can save hour
 Our recent delve into jquery and this assignment in specific have taught me the value of jquery. The last project took me days to complete where as this only took me about a day. Looking back I realize I could have cut the time I spent on the last project in half atleast if I were using jquery. Jquery feels a lot more intuitive than vanila js. 
 
 ## Functionality
+[Untitled_ Jul 5, 2023 3_26 PM.webm](https://github.com/ChazCoats98/Chaz-Coats-s-calendar-assignment/assets/134428862/78ee6e57-e64e-411c-8f63-3a668b957c1e)
 
 
 
