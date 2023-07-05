@@ -4,12 +4,13 @@
 
 $(document).ready(function () {
   var currTime = dayjs().format("DD/MM/YYYY HH:MM");
+  var currHour =dayjs().format("HH");
 
   $("#currentDay").text(currTime);
 
+  var eventTime = $(this).parent().attr("id");
+  var eventText = $(this).siblings(".description").val();
   $(".saveBtn").on("click", function(){
-   var eventTime = $(this).parent().attr("id");
-   var eventText = $(this).siblings(".description").val();
 
    localStorage.setItem(eventTime, eventText);
   })
@@ -17,11 +18,27 @@ $(document).ready(function () {
   $("#hour-10 .description").text(localStorage.getItem("hour-10"));
   $("#hour-11 .description").text(localStorage.getItem("hour-11"));
   $("#hour-12 .description").text(localStorage.getItem("hour-12"));
-  $("#hour-1 .description").text(localStorage.getItem("hour-1"));
-  $("#hour-2 .description").text(localStorage.getItem("hour-2"));
-  $("#hour-3 .description").text(localStorage.getItem("hour-3"));
-  $("#hour-4 .description").text(localStorage.getItem("hour-4"));
-  $("#hour-5 .description").text(localStorage.getItem("hour-5"));
+  $("#hour-13 .description").text(localStorage.getItem("hour-13"));
+  $("#hour-14 .description").text(localStorage.getItem("hour-14"));
+  $("#hour-15 .description").text(localStorage.getItem("hour-15"));
+  $("#hour-16 .description").text(localStorage.getItem("hour-16"));
+  $("#hour-17 .description").text(localStorage.getItem("hour-17"));
+
+  $(".time-block").each(function(){
+    if (currHour == eventTime) {
+      $(this).removeClass("future");
+      $(this).removeClass("past");
+      $(this).addClass("present");
+    } else if (currHour > eventTime) {
+      $(this).removeClass("present");
+      $(this).removeClass("past");
+      $(this).addClass("future");
+    } else if (currHour < eventTime) {
+      $(this).removeClass("present");
+      $(this).removeClass("future");
+      $(this).addClass("past");
+    }
+  });
 
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
