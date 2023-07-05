@@ -1,20 +1,21 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
+//tells browser to wait until HTML is rendered before rendering jquery code
 $(document).ready(function () {
+  //sets dayjs time and date format and displays in header box
   var currTime = dayjs().format("DD/MM/YYYY HH:MM");
   var currHour =dayjs().format("HH");
 
   $("#currentDay").text(currTime);
-
-  var eventTime = $(this).parent().attr("id");
-  var eventText = $(this).siblings(".description").val();
+  
+  //creates an onclick event listener to save the user inputed text to local storage using the id of each time block as a key
   $(".saveBtn").on("click", function(){
+    var Time = $(this).parent().attr("id");
+    var eventText = $(this).siblings(".description").val();
 
-   localStorage.setItem(eventTime, eventText);
+   localStorage.setItem(Time, eventText);
   })
-  $("#hour-9 .description").text(localStorage.getItem("hour-9"));
+
+  //recalls local storage data for each time block and displays it in the corresponding text box
+  $("#hour-09 .description").text(localStorage.getItem("hour-09"));
   $("#hour-10 .description").text(localStorage.getItem("hour-10"));
   $("#hour-11 .description").text(localStorage.getItem("hour-11"));
   $("#hour-12 .description").text(localStorage.getItem("hour-12"));
@@ -24,38 +25,26 @@ $(document).ready(function () {
   $("#hour-16 .description").text(localStorage.getItem("hour-16"));
   $("#hour-17 .description").text(localStorage.getItem("hour-17"));
 
+  //compares the id value of each time block to the current set time and updates its class accordingly 
   $(".time-block").each(function(){
+    var eventTime = $(this).attr("id").split("-")[1];
     if (currHour == eventTime) {
       $(this).removeClass("future");
       $(this).removeClass("past");
       $(this).addClass("present");
     } else if (currHour > eventTime) {
       $(this).removeClass("present");
-      $(this).removeClass("past");
-      $(this).addClass("future");
-    } else if (currHour < eventTime) {
-      $(this).removeClass("present");
       $(this).removeClass("future");
       $(this).addClass("past");
+    } else if (currHour < eventTime) {
+      $(this).removeClass("past");
+      $(this).removeClass("future");
+      $(this).addClass("future");
     }
+    //clears storage and refreshes page so that the callendar is empty 
+    $("#reset").on("click", function(){
+      localStorage.clear();
+      location.reload();
+    });
   });
-
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
 });
