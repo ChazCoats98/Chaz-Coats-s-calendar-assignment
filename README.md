@@ -17,4 +17,5 @@ Our recent delve into jquery and this assignment in specific have taught me the 
 
 ## Links
 Repository: https://github.com/ChazCoats98/Chaz-Coats-s-calendar-assignment
-Aplication: 
+
+Aplication: https://chazcoats98.github.io/Chaz-Coats-s-calendar-assignment/
